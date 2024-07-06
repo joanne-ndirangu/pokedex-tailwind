@@ -5,19 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./output.css">
     <title>Document</title>
+    <style>
+        .character-card {
+            background-color: #484747;
+            color: rgb(217, 216, 216);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .character-card img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div>
-            <button id="prev-page">Back</button>
-            <button id="next-page">Next</button>
+<body class="bg-black">
+    <header class="py-4">
+        <div class="container mx-auto flex justify-center items-center">
+            <button id="prev-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">Back</button>
+            <button id="next-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">Next</button>
         </div>
     </header>
-    <div>
-        <h1>Pokédex</h1>
-        <input type="text" id="search-input" placeholder="Search Pokémon">
-        <div id="character-list"></div>
+    <div class="container mx-auto flex justify-between items-center my-4">
+        <div class="flex justify-between items-center w-full">
+            <h1 class="text-white text-3xl">Pokédex</h1>
+            <input type="text" id="search-input" class="form-input w-1/2 px-3 py-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-600" placeholder="Search Pokémon">
+        </div>
     </div>
+    <div id="character-list" class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 px-4"></div>
     <script src="index.js"></script>
 </body>
 </html>
