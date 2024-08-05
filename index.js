@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const characterList = document.getElementById('character-list');
     const prevPageButton = document.getElementById('prev-page');
     const nextPageButton = document.getElementById('next-page');
+    const paginationButtons = document.getElementById('pagination-buttons');
+    const typeFilter = document.getElementById('type-filter');
 
     let allPokemon = [];
     let filteredPokemon = [];
@@ -24,22 +26,24 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error fetching Pokemon data:', error));
 
         // Function to display a page of Pokemon
-    function displayPage(page) {
-        characterList.innerHTML = ''; // Clear previous content
+        function displayPage(page) {
+            characterList.innerHTML = ''; // Clear previous content
 
-        const start = (page - 1) * itemsPerPage;
-        const end = page * itemsPerPage;
-        const paginatedItems = filteredPokemon.slice(start, end);
+            const start = (page - 1) * itemsPerPage;
+            const end = page * itemsPerPage;
+            const paginatedItems = filteredPokemon.slice(start, end);
 
-        paginatedItems.forEach(pokemon => {
-            const card = createPokemonCard(pokemon);
-            characterList.appendChild(card);
-        });
+            paginatedItems.forEach(pokemon => {
+                const card = createPokemonCard(pokemon);
+                characterList.appendChild(card);
+            });
 
         // Update pagination buttons
         prevPageButton.disabled = currentPage === 1;
         nextPageButton.disabled = end >= filteredPokemon.length;
-    }
+
+        updatePagination();
+        }
 
     // Function to create a Pokemon card
     function createPokemonCard(pokemon) {
@@ -108,4 +112,30 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('input', function() {
         filterCharacters(this.value);
     });
+
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredPokemon.length / itemsPerPage);
+        paginationButtons.textContent = `Page ${currentPage} of ${totalPages}`;
+    }
+    
+    // Event listener for type filter
+    typeFilter.addEventListener('change', function() {
+        filterByType(this.value);
+    });
+
+   // Function to filter Pokemon by type
+function filterByType(type) {
+    if (type === '') {
+        filteredPokemon = allPokemon.slice(); // Corrected from 'pokemon' to 'allPokemon'
+    } else {
+        filteredPokemon = allPokemon.filter(pokemon =>
+            pokemon.types.some(p => p.type.name.toLowerCase() === type.toLowerCase())
+        );
+    }
+
+    // Reset pagination
+    currentPage = 1;
+    displayPage(currentPage);
+}
+
 });

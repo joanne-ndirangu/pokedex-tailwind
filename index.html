@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./output.css">
-    <title>Document</title>
+    <title>Pokédex</title>
     <style>
         .character-card {
             background-color: #484747;
@@ -23,14 +23,40 @@
     <header class="py-4">
         <div class="container mx-auto flex justify-center items-center">
             <button id="prev-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">Back</button>
+            <div id="pagination-buttons" class="text-sky-300 px-4 py-2 rounded-md mr-2"></div>
             <button id="next-page" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">Next</button>
         </div>
     </header>
     <div class="container mx-auto flex justify-between items-center my-4">
         <div class="flex justify-between items-center w-full">
             <h1 class="text-white text-3xl">Pokédex</h1>
-            <input type="text" id="search-input" class="form-input w-1/2 px-3 py-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-600" placeholder="Search Pokémon">
-        </div>
+            <div class="container mx-auto justify-center items-center my-4">
+                <div class="flex justify-center items-center w-full m-8">
+                    <input id="search-input" type="text" class="form-input bg-blue-950 text-sky-300 w-1/2 px-3 py-2 rounded-md m-8" placeholder="Search Pokémon">
+                    <select id="type-filter" class="form-select bg-blue-950 text-sky-300 px-3 py-2 rounded-md">
+                        <option value="">All Types</option>
+                        <option value="normal">Normal</option>
+                        <option value="fire">Fire</option>
+                        <option value="water">Water</option>
+                        <option value="electric">Electric</option>
+                        <option value="grass">Grass</option>
+                        <option value="ice">Ice</option>
+                        <option value="fighting">Fighting</option>
+                        <option value="poison">Poison</option>
+                        <option value="ground">Ground</option>
+                        <option value="flying">Flying</option>
+                        <option value="psychic">Psychic</option>
+                        <option value="bug">Bug</option>
+                        <option value="rock">Rock</option>
+                        <option value="ghost">Ghost</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="dark">Dark</option>
+                        <option value="steel">Steel</option>
+                        <option value="fairy">Fairy</option>
+                    </select>
+                </div>
+            </div>
+        </div> 
     </div>
     <div id="character-list" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4"></div>
     <script src="index.js"></script>
