@@ -112,30 +112,41 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('input', function() {
         filterCharacters(this.value);
     });
-
-    function updatePagination() {
-        const totalPages = Math.ceil(filteredPokemon.length / itemsPerPage);
-        paginationButtons.textContent = `Page ${currentPage} of ${totalPages}`;
-    }
     
     // Event listener for type filter
     typeFilter.addEventListener('change', function() {
         filterByType(this.value);
     });
 
-   // Function to filter Pokemon by type
-function filterByType(type) {
-    if (type === '') {
-        filteredPokemon = allPokemon.slice(); // Corrected from 'pokemon' to 'allPokemon'
-    } else {
-        filteredPokemon = allPokemon.filter(pokemon =>
-            pokemon.types.some(p => p.type.name.toLowerCase() === type.toLowerCase())
-        );
+    // Function to filter Pokemon by type
+    function filterByType(type) {
+        if (type === '') {
+            filteredPokemon = allPokemon.slice(); // Corrected from 'pokemon' to 'allPokemon'
+        } else {
+            filteredPokemon = allPokemon.filter(pokemon =>
+                pokemon.types.some(p => p.type.name.toLowerCase() === type.toLowerCase())
+            );
+        }
+
+        // Reset pagination
+        currentPage = 1;
+        displayPage(currentPage);
     }
 
-    // Reset pagination
-    currentPage = 1;
-    displayPage(currentPage);
-}
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredPokemon.length / itemsPerPage);
+        paginationButtons.innerHTML = ''; // Clear previous content
+
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.classList.add('hover:bg-bg-gray-600', 'hover:text-white', 'py-2', 'px-4', 'm-1', 'rounded-md');
+            button.addEventListener('click', function() {
+                currentPage = i;
+                displayPage(currentPage);
+            });
+            paginationButtons.appendChild(button);
+        }
+    }
 
 });
