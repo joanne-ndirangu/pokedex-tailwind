@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
-            button.classList.add('hover:bg-bg-gray-600', 'hover:text-white', 'py-2', 'px-4', 'm-1', 'rounded-md');
+            button.classList.add('hover:bg-gray-600', 'hover:text-white', 'py-2', 'px-4', 'm-1', 'rounded-md');
             button.addEventListener('click', function() {
                 currentPage = i;
                 displayPage(currentPage);
